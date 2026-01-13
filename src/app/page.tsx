@@ -1,65 +1,476 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  BarChart3,
+  ExternalLink,
+  Github,
+  Search,
+  Zap,
+  Box,
+  Layers,
+  RefreshCw,
+  Clock,
+  Dices,
+  Utensils,
+  Skull,
+  Waves,
+  Hexagon,
+  ArrowRightLeft,
+  LayoutGrid,
+  Info,
+  ChevronRight,
+  Sparkles,
+  Construction,
+  Moon,
+  ChefHat,
+  Shrub,
+  Container
+} from 'lucide-react';
+
+// --- Types ---
+interface Algorithm {
+  id: string;
+  name: string;
+  japaneseName: string;
+  category: 'Basic' | 'Fast' | 'Non-Comparison' | 'Special' | 'Joke';
+  complexity: string;
+  description: string;
+  icon: React.ElementType;
+  color: string;
+  repo: string;
+  tags: string[];
+}
+
+// --- Data ---
+const ALGORITHMS: Algorithm[] = [
+  {
+    id: 'bubble',
+    name: 'Bubble Sort',
+    japaneseName: 'バブルソート',
+    category: 'Basic',
+    complexity: 'O(N²)',
+    description: '隣り合う要素を比較して入れ替える、最も直感的な整列手法。',
+    icon: RefreshCw,
+    color: 'from-cyan-500 to-blue-500',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-bubble',
+    tags: ['Stable', 'Swap']
+  },
+  {
+    id: 'selection',
+    name: 'Selection Sort',
+    japaneseName: '選択ソート',
+    category: 'Basic',
+    complexity: 'O(N²)',
+    description: '未整列の範囲から最小値を「選択」して先頭に移動させる手法。',
+    icon: Target,
+    color: 'from-rose-500 to-pink-500',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-selection',
+    tags: ['Simple', 'Selection']
+  },
+  {
+    id: 'insertion',
+    name: 'Insertion Sort',
+    japaneseName: '挿入ソート',
+    category: 'Basic',
+    complexity: 'O(N²)',
+    description: '整列済みの列に対して、適切な位置に要素を「挿入」する手法。',
+    icon: ArrowRightLeft,
+    color: 'from-indigo-500 to-violet-500',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-insertion',
+    tags: ['Online', 'Stable']
+  },
+  {
+    id: 'binary-insertion',
+    name: 'Binary Insertion Sort',
+    japaneseName: '二分挿入ソート',
+    category: 'Basic',
+    complexity: 'O(N²)',
+    description: '挿入位置の探索に「二分探索」を用い、比較回数を節約した進化形。',
+    icon: Search,
+    color: 'from-cyan-400 to-teal-500',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-binary-insertion',
+    tags: ['Optimal', 'Search']
+  },
+  {
+    id: 'quick',
+    name: 'Quick Sort',
+    japaneseName: 'クイックソート',
+    category: 'Fast',
+    complexity: 'O(N log N)',
+    description: 'ピボットを基準に分割を繰り返す、実用上極めて高速なソート。',
+    icon: Zap,
+    color: 'from-emerald-500 to-teal-500',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-quick',
+    tags: ['Divide & Conquer', 'Fast']
+  },
+  {
+    id: 'merge',
+    name: 'Merge Sort',
+    japaneseName: 'マージソート',
+    category: 'Fast',
+    complexity: 'O(N log N)',
+    description: '分割した塊を整列しながら「マージ（統合）」する安定した手法。',
+    icon: Waves,
+    color: 'from-violet-500 to-purple-600',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-merge',
+    tags: ['Recursion', 'Stable']
+  },
+  {
+    id: 'heap',
+    name: 'Heap Sort',
+    japaneseName: 'ヒープソート',
+    category: 'Fast',
+    complexity: 'O(N log N)',
+    description: '「ヒープ構造」を構築し、最大値を効率よく取り出していく独創的な手法。',
+    icon: Hexagon,
+    color: 'from-amber-500 to-orange-600',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-heap',
+    tags: ['Structure', 'Selection']
+  },
+  {
+    id: 'shell',
+    name: 'Shell Sort',
+    japaneseName: 'シェルソート',
+    category: 'Special',
+    complexity: 'O(N¹.²⁵) ~',
+    description: '一定の間隔でグループ分けしてソートする、挿入ソートの改良版。',
+    icon: Layers,
+    color: 'from-orange-500 to-red-600',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-shell',
+    tags: ['Adaptive', 'Fast']
+  },
+  {
+    id: 'radix',
+    name: 'Radix Sort',
+    japaneseName: '基数ソート',
+    category: 'Non-Comparison',
+    complexity: 'O(NK)',
+    description: '数値を「桁（Digit）」ごとに分解し、下位桁から順に整列する非比較型。',
+    icon: LayoutGrid,
+    color: 'from-pink-500 to-rose-400',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-radix',
+    tags: ['Fast', 'Linear']
+  },
+  {
+    id: 'cocktail',
+    name: 'Cocktail Sort',
+    japaneseName: 'カクテルソート',
+    category: 'Special',
+    complexity: 'O(N²)',
+    description: 'バブルソートを往復運動に拡張し、端への要素移動を高速化。',
+    icon: ArrowRightLeft,
+    color: 'from-lime-400 to-emerald-500',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-cocktail',
+    tags: ['Bidirectional', 'Stable']
+  },
+  {
+    id: 'bucket',
+    name: 'Bucket Sort',
+    japaneseName: 'バケツソート',
+    category: 'Non-Comparison',
+    complexity: 'O(N+K)',
+    description: '数値を「バケツ（範囲）」に分配し、個別にソートして結合する手法。',
+    icon: Container,
+    color: 'from-indigo-400 to-blue-600',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-bucket',
+    tags: ['Distribution', 'Fast']
+  },
+  {
+    id: 'comb',
+    name: 'Comb Sort',
+    japaneseName: 'コムソート',
+    category: 'Special',
+    complexity: 'O(N log N)',
+    description: '最初は大きな間隔で比較し、徐々に間隔を縮めていく高速バブルソート。',
+    icon: Waves,
+    color: 'from-blue-500 to-indigo-600',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-comb',
+    tags: ['Shrink', 'Gap']
+  },
+  {
+    id: 'gnome',
+    name: 'Gnome Sort',
+    japaneseName: 'ノームソート',
+    category: 'Joke',
+    complexity: 'O(N²)',
+    description: '庭の小人が隣を見て「行ったり来たり」するような、ユニークな動きのソート。',
+    icon: Shrub,
+    color: 'from-emerald-600 to-green-700',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-gnome',
+    tags: ['Stupid', 'Simple']
+  },
+  {
+    id: 'sleep',
+    name: 'Sleep Sort',
+    japaneseName: 'スリープソート',
+    category: 'Joke',
+    complexity: 'O(max(N))',
+    description: '各要素を自分の値の分だけ眠らせ、起きた順に並べる伝説のジョーク手法。',
+    icon: Moon,
+    color: 'from-indigo-600 to-slate-800',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-sleep',
+    tags: ['Thread', 'Physical']
+  },
+  {
+    id: 'bogo',
+    name: 'Bogo Sort',
+    japaneseName: 'ボゴソート',
+    category: 'Joke',
+    complexity: 'O(∞)',
+    description: 'シャッフルを繰り返し、運良く整列するのを待つ究極の非効率手法。',
+    icon: Dices,
+    color: 'from-rose-600 to-red-600',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-bogo',
+    tags: ['Chaos', 'Luck']
+  },
+  {
+    id: 'pancake',
+    name: 'Pancake Sort',
+    japaneseName: 'パンケーキソート',
+    category: 'Special',
+    complexity: 'O(N) flips',
+    description: 'パンケーキを「ひっくり返す」操作だけでデータを整列させるスタック手法。',
+    icon: ChefHat,
+    color: 'from-amber-600 to-orange-500',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-pancake',
+    tags: ['Flip', 'Stack']
+  },
+  {
+    id: 'stooge',
+    name: 'Stooge Sort',
+    japaneseName: 'ストゥージソート',
+    category: 'Joke',
+    complexity: 'O(N^2.71)',
+    description: '範囲を3分割し、異常な回数の再帰を繰り返す「頑固」なソート手法。',
+    icon: Construction,
+    color: 'from-slate-700 to-zinc-900',
+    repo: 'https://github.com/iidaatcnt/sorting-studio-stooge',
+    tags: ['Overkill', 'Recursion']
+  }
+];
+
+
+// --- Components ---
+const StatCard = ({ label, value, icon: Icon, color }: any) => (
+  <div className="glass p-6 rounded-[2rem] flex items-center gap-6 flex-1 min-w-[200px]">
+    <div className={`p-4 rounded-2xl bg-gradient-to-br ${color} shadow-lg shadow-current/10`}>
+      <Icon className="text-white w-6 h-6" />
+    </div>
+    <div>
+      <div className="text-[10px] mono uppercase font-black text-slate-500 tracking-widest">{label}</div>
+      <div className="text-xl font-black text-white">{value}</div>
+    </div>
+  </div>
+);
+
+export default function Portal() {
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('All');
+
+  const categories = ['All', 'Basic', 'Fast', 'Non-Comparison', 'Special', 'Joke'];
+
+  const filteredAlgos = ALGORITHMS.filter(a => {
+    const matchesSearch = a.name.toLowerCase().includes(search.toLowerCase()) ||
+      a.japaneseName.includes(search);
+    const matchesFilter = filter === 'All' || a.category === filter;
+    return matchesSearch && matchesFilter;
+  });
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-cyan-500/30">
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-8"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <Sparkles size={14} className="text-cyan-400" />
+            <span className="text-[10px] mono font-black uppercase tracking-[0.2em] text-cyan-400">interactive_learning_series_v2</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-[0.9]"
           >
-            Documentation
-          </a>
+            Sorting <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">Studio_World</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-8 text-slate-400 max-w-2xl mx-auto text-sm leading-relaxed font-medium"
+          >
+            アルゴリズムの多様性と美しさを探求する、最先端のソート学習コレクション。
+            基本のバブルから究極のジョークまで、17種類の芸術的なビジュアライザーが集結しました。
+          </motion.p>
         </div>
-      </main>
+      </section>
+
+      {/* Stats Board */}
+      <div className="max-w-7xl mx-auto px-6 mb-20 flex flex-wrap gap-6 justify-center">
+        <StatCard label="Total Modules" value="17" icon={Box} color="from-cyan-500 to-blue-500" />
+        <StatCard label="Fastest Method" value="O(N)" icon={Zap} color="from-emerald-500 to-teal-500" />
+        <StatCard label="Slowest Logic" value="O(∞)" icon={Skull} color="from-rose-500 to-pink-500" />
+        <StatCard label="Learning Series" value="World Vol.1" icon={ExternalLink} color="from-amber-500 to-orange-500" />
+      </div>
+
+      {/* Controls */}
+      <div className="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="relative w-full md:w-96">
+          <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 w-4 h-4" />
+          <input
+            type="text"
+            placeholder="アルゴリズムを検索..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full bg-white/5 border border-white/5 rounded-2xl py-4 pl-14 pr-6 text-sm outline-none focus:border-cyan-500/30 transition-all placeholder:text-slate-700"
+          />
+        </div>
+
+        <div className="flex items-center gap-2 p-1.5 glass rounded-2xl overflow-x-auto max-w-full">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`px-5 py-2 rounded-xl text-[10px] mono font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20' : 'text-slate-500 hover:text-white'}`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Grid */}
+      <section className="max-w-7xl mx-auto px-6 pb-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filteredAlgos.map((algo, i) => {
+              const Icon = algo.icon;
+              return (
+                <motion.div
+                  layout
+                  key={algo.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="group"
+                >
+                  <a
+                    href={algo.repo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block h-full glass rounded-[2.5rem] p-8 glass-hover transition-all duration-500 group-hover:-translate-y-1 relative overflow-hidden"
+                  >
+                    {/* Background glow */}
+                    <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${algo.color} opacity-0 group-hover:opacity-10 blur-[40px] transition-opacity duration-500`} />
+
+                    <div className="flex justify-between items-start mb-6">
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${algo.color} flex items-center justify-center shadow-lg shadow-current/10 relative z-10`}>
+                        <Icon className="text-white w-7 h-7" />
+                      </div>
+                      <div className="flex flex-col items-end">
+                        <span className="text-[9px] mono font-black text-slate-600 uppercase tracking-widest">{algo.category}</span>
+                        <span className="text-[10px] mono font-bold text-cyan-400 mt-1">{algo.complexity}</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6">
+                      <h2 className="text-xl font-black tracking-tight text-white group-hover:text-cyan-400 transition-colors">{algo.name}</h2>
+                      <div className="text-[10px] mono text-slate-500 flex items-center gap-2">
+                        <span className="text-white bg-white/5 px-2 py-0.5 rounded-md">{algo.japaneseName}</span>
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-2 mb-8 font-medium">
+                      {algo.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                      {algo.tags.map(tag => (
+                        <span key={tag} className="text-[8px] mono font-black uppercase tracking-widest text-slate-700 bg-white/5 px-2 py-1 rounded-lg">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="absolute bottom-8 right-8 text-slate-700 group-hover:text-white transition-colors">
+                      <ChevronRight size={18} />
+                    </div>
+                  </a>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/5 bg-slate-950/80 py-20 px-6 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col items-center gap-8">
+          <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center grayscale opacity-50">
+            <LayoutGrid size={24} />
+          </div>
+          <div className="space-y-2">
+            <p className="text-[10px] mono font-black text-slate-600 uppercase tracking-[0.5em]">Sorting Studio Portal // Creative Edition</p>
+            <div className="flex items-center gap-6 justify-center mt-6">
+              <a href="https://github.com/iidaatcnt" className="text-slate-500 hover:text-white transition-colors"><Github size={20} /></a>
+              <a href="#" className="text-slate-500 hover:text-white transition-colors"><Zap size={20} /></a>
+              <a href="#" className="text-slate-500 hover:text-white transition-colors"><InternalLink size={20} /></a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
+}
+
+function InternalLink(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </svg>
+  )
+}
+
+function Target(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="2" />
+    </svg>
+  )
 }
