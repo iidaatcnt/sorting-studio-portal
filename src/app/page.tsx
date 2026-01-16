@@ -279,7 +279,7 @@ export default function Portal() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 mb-6"
           >
             <Sparkles size={14} className="text-indigo-600" />
-            <span className="text-xs font-bold text-indigo-700 tracking-tight">情報I 共通テスト対策：アルゴリズム学習シリーズ</span>
+            <span className="text-xs font-bold text-indigo-700 tracking-tight">AI時代に必要とされる「論理的思考」の土台をつくる</span>
           </motion.div>
 
           <motion.h1
@@ -288,8 +288,8 @@ export default function Portal() {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 mb-6"
           >
-            ソート・アルゴリズム <br />
-            <span className="text-indigo-600">学習スタジオ</span>
+            教養としての <br />
+            <span className="text-indigo-600">アルゴリズム・スタジオ</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -297,8 +297,8 @@ export default function Portal() {
             transition={{ delay: 0.2 }}
             className="mt-6 text-slate-600 max-w-2xl mx-auto text-base leading-relaxed font-medium"
           >
-            教科書に出てくる「バブルソート」から、ちょっとマニアックなアルゴリズムまで。
-            データの並び替えがどんな仕組みで動いているのか、アニメーションで楽しく体験しましょう！
+            AIが答えを出す時代だからこそ、その裏側にある「手順の正解」を知ることが一生モノの武器になります。
+            データの並び替えというシンプルな問題から、コンピュータが生み出す論理の美しさを体感しましょう。
           </motion.p>
         </div>
       </section>
@@ -402,12 +402,11 @@ export default function Portal() {
             <LayoutGrid size={24} />
           </div>
           <div className="space-y-4">
-            <p className="text-xs font-bold text-slate-300 uppercase tracking-widest">ソート・アルゴリズム・スタジオ // 情報I 学習ポータル</p>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Fundamental Wisdom for the AI Era // Algorithm Literacy // しろいプログラミング教室</p>
             <div className="flex flex-col items-center gap-2">
-              <p className="text-[9px] font-bold text-slate-400">しろいプログラミング教室</p>
               <div className="flex gap-4 opacity-40 hover:opacity-100 transition-opacity">
-                <a href="https://shiroi-hackers.com/" target="_blank" rel="noopener noreferrer" className="text-[8px] text-slate-500 hover:text-indigo-600 transition-colors">Official Site</a>
-                <a href="https://www.instagram.com/shiroihackers/" target="_blank" rel="noopener noreferrer" className="text-[8px] text-slate-500 hover:text-indigo-600 transition-colors">Instagram</a>
+                <a href="https://shiroi-hackers.com/" target="_blank" rel="noopener noreferrer" className="text-[8px] text-slate-500 hover:text-indigo-600 transition-colors font-bold">Official Site</a>
+                <a href="https://www.instagram.com/shiroihackers/" target="_blank" rel="noopener noreferrer" className="text-[8px] text-slate-500 hover:text-indigo-600 transition-colors font-bold">Instagram</a>
               </div>
             </div>
           </div>
