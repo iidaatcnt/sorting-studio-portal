@@ -252,18 +252,6 @@ const ALGORITHMS: Algorithm[] = [
 ];
 
 
-// --- Components ---
-const StatCard = ({ label, value, icon: Icon, color }: any) => (
-  <div className="glass p-6 rounded-[2rem] flex items-center gap-6 flex-1 min-w-[200px]">
-    <div className={`p-4 rounded-2xl bg-gradient-to-br ${color} shadow-lg shadow-current/10`}>
-      <Icon className="text-white w-6 h-6" />
-    </div>
-    <div>
-      <div className="text-[10px] mono uppercase font-black text-slate-500 tracking-widest">{label}</div>
-      <div className="text-xl font-black text-slate-900">{value}</div>
-    </div>
-  </div>
-);
 
 export default function Portal() {
   const [search, setSearch] = useState('');
@@ -315,13 +303,6 @@ export default function Portal() {
         </div>
       </section>
 
-      {/* Stats Board */}
-      <div className="max-w-7xl mx-auto px-6 mb-20 flex flex-wrap gap-6 justify-center">
-        <StatCard label="Total Modules" value="17" icon={Box} color="from-cyan-500 to-blue-500" />
-        <StatCard label="Fastest Method" value="O(N)" icon={Zap} color="from-emerald-500 to-teal-500" />
-        <StatCard label="Slowest Logic" value="O(∞)" icon={Skull} color="from-rose-500 to-pink-500" />
-        <StatCard label="Learning Series" value="World Vol.1" icon={ExternalLink} color="from-amber-500 to-orange-500" />
-      </div>
 
       {/* Controls */}
       <div className="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row items-center justify-between gap-8">
