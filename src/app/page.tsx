@@ -270,35 +270,35 @@ export default function Portal() {
     <div className="min-h-screen bg-[#f8fafc] text-slate-900 font-sans selection:bg-cyan-500/30">
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-cyan-500/[0.08] blur-[120px] rounded-full pointer-events-none" />
+      <section className="relative pt-24 pb-16 px-6 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-indigo-500/[0.05] blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 mb-6"
           >
-            <Sparkles size={14} className="text-cyan-400" />
-            <span className="text-[10px] mono font-black uppercase tracking-[0.2em] text-cyan-600">interactive_learning_series_v2</span>
+            <Sparkles size={14} className="text-indigo-600" />
+            <span className="text-xs font-bold text-indigo-700 tracking-tight">情報I 共通テスト対策：アルゴリズム学習シリーズ</span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-[0.9] text-slate-900"
+            className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 mb-6"
           >
-            Sorting <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">Studio_World</span>
+            ソート・アルゴリズム <br />
+            <span className="text-indigo-600">学習スタジオ</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-8 text-slate-500 max-w-2xl mx-auto text-sm leading-relaxed font-medium"
+            className="mt-6 text-slate-600 max-w-2xl mx-auto text-base leading-relaxed font-medium"
           >
-            アルゴリズムの多様性と美しさを探求する、最先端のソート学習コレクション。
-            基本のバブルから究極のジョークまで、17種類の芸術的なビジュアライザーが集結しました。
+            教科書に出てくる「バブルソート」から、ちょっとマニアックなアルゴリズムまで。
+            データの並び替えがどんな仕組みで動いているのか、アニメーションで楽しく体験しましょう！
           </motion.p>
         </div>
       </section>
@@ -307,10 +307,10 @@ export default function Portal() {
       {/* Controls */}
       <div className="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="relative w-full md:w-96">
-          <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 w-4 h-4" />
+          <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
           <input
             type="text"
-            placeholder="アルゴリズムを検索..."
+            placeholder="アルゴリズムを名前で検索..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full bg-white border border-slate-200 rounded-2xl py-4 pl-14 pr-6 text-sm outline-none focus:border-cyan-500/30 shadow-sm transition-all placeholder:text-slate-400"
@@ -360,15 +360,15 @@ export default function Portal() {
                         <Icon className="text-white w-7 h-7" />
                       </div>
                       <div className="flex flex-col items-end">
-                        <span className="text-[9px] mono font-black text-slate-600 uppercase tracking-widest">{algo.category}</span>
-                        <span className="text-[10px] mono font-bold text-cyan-600 mt-1">{algo.complexity}</span>
+                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{algo.category}</span>
+                        <span className="text-[10px] font-bold text-indigo-600 mt-1">計算量: {algo.complexity}</span>
                       </div>
                     </div>
 
                     <div className="space-y-2 mb-6">
-                      <h2 className="text-xl font-black tracking-tight text-slate-900 group-hover:text-cyan-600 transition-colors">{algo.name}</h2>
-                      <div className="text-[10px] mono text-slate-500 flex items-center gap-2">
-                        <span className="text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">{algo.japaneseName}</span>
+                      <h2 className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">{algo.japaneseName}</h2>
+                      <div className="text-[10px] text-slate-400 flex items-center gap-2">
+                        <span className="text-slate-400 font-medium">{algo.name}</span>
                       </div>
                     </div>
 
@@ -401,12 +401,14 @@ export default function Portal() {
           <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center grayscale opacity-50">
             <LayoutGrid size={24} />
           </div>
-          <div className="space-y-2">
-            <p className="text-[10px] mono font-black text-slate-600 uppercase tracking-[0.5em]">Sorting Studio Portal // Creative Edition</p>
-            <div className="flex items-center gap-6 justify-center mt-6">
-              <a href="https://github.com/iidaatcnt" className="text-slate-500 hover:text-white transition-colors"><Github size={20} /></a>
-              <a href="#" className="text-slate-500 hover:text-white transition-colors"><Zap size={20} /></a>
-              <a href="#" className="text-slate-500 hover:text-white transition-colors"><InternalLink size={20} /></a>
+          <div className="space-y-4">
+            <p className="text-xs font-bold text-slate-300 uppercase tracking-widest">ソート・アルゴリズム・スタジオ // 情報I 学習ポータル</p>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-[9px] font-bold text-slate-400">しろいプログラミング教室</p>
+              <div className="flex gap-4 opacity-40 hover:opacity-100 transition-opacity">
+                <a href="https://shiroi-hackers.com/" target="_blank" rel="noopener noreferrer" className="text-[8px] text-slate-500 hover:text-indigo-600 transition-colors">Official Site</a>
+                <a href="https://www.instagram.com/shiroihackers/" target="_blank" rel="noopener noreferrer" className="text-[8px] text-slate-500 hover:text-indigo-600 transition-colors">Instagram</a>
+              </div>
             </div>
           </div>
         </div>
