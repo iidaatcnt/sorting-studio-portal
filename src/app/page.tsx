@@ -54,7 +54,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '隣り合う要素を比較して入れ替える、最も直感的な整列手法。',
     icon: RefreshCw,
     color: 'from-cyan-500 to-blue-500',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-bubble',
+    repo: 'https://sorting-studio-bubble.vercel.app',
     tags: ['Stable', 'Swap']
   },
   {
@@ -66,7 +66,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '未整列の範囲から最小値を「選択」して先頭に移動させる手法。',
     icon: Target,
     color: 'from-rose-500 to-pink-500',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-selection',
+    repo: 'https://sorting-studio-selection.vercel.app',
     tags: ['Simple', 'Selection']
   },
   {
@@ -78,7 +78,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '整列済みの列に対して、適切な位置に要素を「挿入」する手法。',
     icon: ArrowRightLeft,
     color: 'from-indigo-500 to-violet-500',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-insertion',
+    repo: 'https://sorting-studio-insertion.vercel.app',
     tags: ['Online', 'Stable']
   },
   {
@@ -90,7 +90,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '挿入位置の探索に「二分探索」を用い、比較回数を節約した進化形。',
     icon: Search,
     color: 'from-cyan-400 to-teal-500',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-binary-insertion',
+    repo: 'https://sorting-studio-binary-insertion.vercel.app',
     tags: ['Optimal', 'Search']
   },
   {
@@ -102,7 +102,7 @@ const ALGORITHMS: Algorithm[] = [
     description: 'ピボットを基準に分割を繰り返す、実用上極めて高速なソート。',
     icon: Zap,
     color: 'from-emerald-500 to-teal-500',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-quick',
+    repo: 'https://sorting-studio-quick.vercel.app',
     tags: ['Divide & Conquer', 'Fast']
   },
   {
@@ -114,7 +114,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '分割した塊を整列しながら「マージ（統合）」する安定した手法。',
     icon: Waves,
     color: 'from-violet-500 to-purple-600',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-merge',
+    repo: 'https://sorting-studio-merge.vercel.app',
     tags: ['Recursion', 'Stable']
   },
   {
@@ -126,7 +126,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '「ヒープ構造」を構築し、最大値を効率よく取り出していく独創的な手法。',
     icon: Hexagon,
     color: 'from-amber-500 to-orange-600',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-heap',
+    repo: 'https://sorting-studio-heap.vercel.app',
     tags: ['Structure', 'Selection']
   },
   {
@@ -138,7 +138,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '一定の間隔でグループ分けしてソートする、挿入ソートの改良版。',
     icon: Layers,
     color: 'from-orange-500 to-red-600',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-shell',
+    repo: 'https://sorting-studio-shell.vercel.app',
     tags: ['Adaptive', 'Fast']
   },
   {
@@ -150,7 +150,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '数値を「桁（Digit）」ごとに分解し、下位桁から順に整列する非比較型。',
     icon: LayoutGrid,
     color: 'from-pink-500 to-rose-400',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-radix',
+    repo: 'https://sorting-studio-radix.vercel.app',
     tags: ['Fast', 'Linear']
   },
   {
@@ -162,7 +162,7 @@ const ALGORITHMS: Algorithm[] = [
     description: 'バブルソートを往復運動に拡張し、端への要素移動を高速化。',
     icon: ArrowRightLeft,
     color: 'from-lime-400 to-emerald-500',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-cocktail',
+    repo: 'https://sorting-studio-cocktail.vercel.app',
     tags: ['Bidirectional', 'Stable']
   },
   {
@@ -174,7 +174,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '数値を「バケツ（範囲）」に分配し、個別にソートして結合する手法。',
     icon: Container,
     color: 'from-indigo-400 to-blue-600',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-bucket',
+    repo: 'https://sorting-studio-bucket.vercel.app',
     tags: ['Distribution', 'Fast']
   },
   {
@@ -186,7 +186,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '最初は大きな間隔で比較し、徐々に間隔を縮めていく高速バブルソート。',
     icon: Waves,
     color: 'from-blue-500 to-indigo-600',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-comb',
+    repo: 'https://sorting-studio-comb.vercel.app',
     tags: ['Shrink', 'Gap']
   },
   {
@@ -198,7 +198,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '庭の小人が隣を見て「行ったり来たり」するような、ユニークな動きのソート。',
     icon: Shrub,
     color: 'from-emerald-600 to-green-700',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-gnome',
+    repo: 'https://sorting-studio-gnome.vercel.app',
     tags: ['Stupid', 'Simple']
   },
   {
@@ -210,7 +210,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '各要素を自分の値の分だけ眠らせ、起きた順に並べる伝説のジョーク手法。',
     icon: Moon,
     color: 'from-indigo-600 to-slate-800',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-sleep',
+    repo: 'https://sorting-studio-sleep.vercel.app',
     tags: ['Thread', 'Physical']
   },
   {
@@ -222,7 +222,7 @@ const ALGORITHMS: Algorithm[] = [
     description: 'シャッフルを繰り返し、運良く整列するのを待つ究極の非効率手法。',
     icon: Dices,
     color: 'from-rose-600 to-red-600',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-bogo',
+    repo: 'https://sorting-studio-bogo.vercel.app',
     tags: ['Chaos', 'Luck']
   },
   {
@@ -234,7 +234,7 @@ const ALGORITHMS: Algorithm[] = [
     description: 'パンケーキを「ひっくり返す」操作だけでデータを整列させるスタック手法。',
     icon: ChefHat,
     color: 'from-amber-600 to-orange-500',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-pancake',
+    repo: 'https://sorting-studio-pancake.vercel.app',
     tags: ['Flip', 'Stack']
   },
   {
@@ -246,7 +246,7 @@ const ALGORITHMS: Algorithm[] = [
     description: '範囲を3分割し、異常な回数の再帰を繰り返す「頑固」なソート手法。',
     icon: Construction,
     color: 'from-slate-700 to-zinc-900',
-    repo: 'https://github.com/iidaatcnt/sorting-studio-stooge',
+    repo: 'https://sorting-studio-stooge.vercel.app',
     tags: ['Overkill', 'Recursion']
   }
 ];
@@ -260,7 +260,7 @@ const StatCard = ({ label, value, icon: Icon, color }: any) => (
     </div>
     <div>
       <div className="text-[10px] mono uppercase font-black text-slate-500 tracking-widest">{label}</div>
-      <div className="text-xl font-black text-white">{value}</div>
+      <div className="text-xl font-black text-slate-900">{value}</div>
     </div>
   </div>
 );
@@ -279,11 +279,11 @@ export default function Portal() {
   });
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 font-sans selection:bg-cyan-500/30">
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-cyan-500/[0.08] blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -291,14 +291,14 @@ export default function Portal() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-8"
           >
             <Sparkles size={14} className="text-cyan-400" />
-            <span className="text-[10px] mono font-black uppercase tracking-[0.2em] text-cyan-400">interactive_learning_series_v2</span>
+            <span className="text-[10px] mono font-black uppercase tracking-[0.2em] text-cyan-600">interactive_learning_series_v2</span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-[0.9]"
+            className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-[0.9] text-slate-900"
           >
             Sorting <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">Studio_World</span>
@@ -307,7 +307,7 @@ export default function Portal() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-8 text-slate-400 max-w-2xl mx-auto text-sm leading-relaxed font-medium"
+            className="mt-8 text-slate-500 max-w-2xl mx-auto text-sm leading-relaxed font-medium"
           >
             アルゴリズムの多様性と美しさを探求する、最先端のソート学習コレクション。
             基本のバブルから究極のジョークまで、17種類の芸術的なビジュアライザーが集結しました。
@@ -332,7 +332,7 @@ export default function Portal() {
             placeholder="アルゴリズムを検索..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-white/5 border border-white/5 rounded-2xl py-4 pl-14 pr-6 text-sm outline-none focus:border-cyan-500/30 transition-all placeholder:text-slate-700"
+            className="w-full bg-white border border-slate-200 rounded-2xl py-4 pl-14 pr-6 text-sm outline-none focus:border-cyan-500/30 shadow-sm transition-all placeholder:text-slate-400"
           />
         </div>
 
@@ -341,7 +341,7 @@ export default function Portal() {
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-5 py-2 rounded-xl text-[10px] mono font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20' : 'text-slate-500 hover:text-white'}`}
+              className={`px-5 py-2 rounded-xl text-[10px] mono font-black uppercase tracking-widest transition-all ${filter === cat ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20' : 'text-slate-400 hover:text-slate-600'}`}
             >
               {cat}
             </button>
@@ -380,14 +380,14 @@ export default function Portal() {
                       </div>
                       <div className="flex flex-col items-end">
                         <span className="text-[9px] mono font-black text-slate-600 uppercase tracking-widest">{algo.category}</span>
-                        <span className="text-[10px] mono font-bold text-cyan-400 mt-1">{algo.complexity}</span>
+                        <span className="text-[10px] mono font-bold text-cyan-600 mt-1">{algo.complexity}</span>
                       </div>
                     </div>
 
                     <div className="space-y-2 mb-6">
-                      <h2 className="text-xl font-black tracking-tight text-white group-hover:text-cyan-400 transition-colors">{algo.name}</h2>
+                      <h2 className="text-xl font-black tracking-tight text-slate-900 group-hover:text-cyan-600 transition-colors">{algo.name}</h2>
                       <div className="text-[10px] mono text-slate-500 flex items-center gap-2">
-                        <span className="text-white bg-white/5 px-2 py-0.5 rounded-md">{algo.japaneseName}</span>
+                        <span className="text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">{algo.japaneseName}</span>
                       </div>
                     </div>
 
@@ -395,15 +395,15 @@ export default function Portal() {
                       {algo.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                       {algo.tags.map(tag => (
-                        <span key={tag} className="text-[8px] mono font-black uppercase tracking-widest text-slate-700 bg-white/5 px-2 py-1 rounded-lg">
+                        <span key={tag} className="text-[8px] mono font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-2 py-1 rounded-lg">
                           #{tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="absolute bottom-8 right-8 text-slate-700 group-hover:text-white transition-colors">
+                    <div className="absolute bottom-8 right-8 text-slate-300 group-hover:text-cyan-600 transition-colors">
                       <ChevronRight size={18} />
                     </div>
                   </a>
@@ -415,9 +415,9 @@ export default function Portal() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 bg-slate-950/80 py-20 px-6 text-center">
+      <footer className="border-t border-slate-100 bg-white/80 py-20 px-6 text-center">
         <div className="max-w-7xl mx-auto flex flex-col items-center gap-8">
-          <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center grayscale opacity-50">
+          <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center grayscale opacity-50">
             <LayoutGrid size={24} />
           </div>
           <div className="space-y-2">
